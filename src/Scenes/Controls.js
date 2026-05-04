@@ -6,7 +6,6 @@ class Controls extends Phaser.Scene {
     create() {
         // Background
         this.add.rectangle(400, 300, 800, 600, 0x000000);
-        this.menuMusic = this.sound.add("menuMusic", { loop: true, volume: 0.3 });
 
         // Title
         this.add.text(400, 100, "CONTROLS", {
@@ -20,7 +19,7 @@ class Controls extends Phaser.Scene {
             "A / D  → Move Left / Right\n" +
             "SPACE → Shoot\n" +
             "S → Speed Boost (15 sec cooldown)\n\n" +
-            "Avoid enemies and survive!",
+            "Avoid enemies and survive",
         {
             fontFamily: "Courier New",
             fontSize: "24px",
@@ -35,7 +34,7 @@ class Controls extends Phaser.Scene {
             color: "#ffff00"
         }).setOrigin(0.5);
 
-        // ✨ Animation (fade in/out)
+        // Animation (fade in/out)
         this.tweens.add({
             targets: pressText,
             alpha: 0,
@@ -44,13 +43,11 @@ class Controls extends Phaser.Scene {
             repeat: -1
         });
 
-        // Input
         this.enterKey = this.input.keyboard.addKey(Phaser.Input.Keyboard.KeyCodes.ENTER);
     }
 
     update() {
         if (Phaser.Input.Keyboard.JustDown(this.enterKey)) {
-            this.menuMusic.stop();
             this.scene.start("menuScene"); // go back
         }
     }

@@ -376,29 +376,35 @@ class Movement extends Phaser.Scene {
     enemyMovement() {
         let my = this.my;
 
-        let hitEdge = false;
-
-        // Move ALL aliens
+        // Move ALL aliens left/right
         for (let alien of my.sprite.alienGroup.getChildren()) {
             alien.x += this.enemyDirection * 20 * this.game.loop.delta / 1000;
         }
 
-        // Move the invisible formation bounds
-        this.formationLeft += this.enemyDirection * 20 * this.game.loop.delta / 1000;
-        this.formationRight += this.enemyDirection * 20 * this.game.loop.delta / 1000;
+        // ✅ Recalculate formation bounds from REAL positions (fixes bug)
+        let aliens = my.sprite.alienGroup.getChildren();
 
-        // Check ONLY the formation edges (NOT individual aliens)
-        if (this.formationRight > this.scale.width - 50 || this.formationLeft < 50) {
-            hitEdge = true;
+        if (aliens.length > 0) {
+            this.formationLeft = Math.min(...aliens.map(a => a.x));
+            this.formationRight = Math.max(...aliens.map(a => a.x));
         }
 
-        if (hitEdge) {
-            this.enemyDirection *= -1;
+        // ✅ Edge detection (ONLY triggers once per side)
+        if (this.formationRight > this.scale.width - 50 && this.enemyDirection === 1) {
+            this.enemyDirection = -1;
 
-            for (let alien of my.sprite.alienGroup.getChildren()) {
+            for (let alien of aliens) {
                 alien.y += 5;
             }
         }
+        else if (this.formationLeft < 50 && this.enemyDirection === -1) {
+            this.enemyDirection = 1;
+
+            for (let alien of aliens) {
+                alien.y += 5;
+            }
+        }
+
 
         // Move UFOs across the top of the screen
         for (let ufo of my.sprite.UFOGroup.getChildren()) {
