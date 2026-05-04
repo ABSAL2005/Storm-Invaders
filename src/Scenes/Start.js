@@ -21,6 +21,7 @@ class MenuScene extends Phaser.Scene {
         this.menuMusic.play();
         this.add.text(this.scale.width / 3 - 40, 250, "STORM INVADERS", { fontSize: "40px", fill: "#eaff00" }).setDepth(1);
         this.add.text(this.scale.width / 3, 350, "Press SPACE to Start", { fontSize: "20px", fill: "#eaff00" }).setDepth(1);
+        this.add.text(this.scale.width / 3, 400, "Press C for Controls", { fontSize: "20px", fill: "#eaff00" }).setDepth(1);
 
         this.input.keyboard.once("keydown-SPACE", () => {
 
@@ -29,6 +30,14 @@ class MenuScene extends Phaser.Scene {
             this.time.delayedCall(800, () => {
                 this.menuMusic.stop();
                 this.scene.start("movementScene");
+            });
+        });
+
+        this.input.keyboard.once("keydown-C", () => {
+
+            this.time.delayedCall(300, () => {
+                this.menuMusic.stop();
+                this.scene.start("controlsScene");
             });
         });
 

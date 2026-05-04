@@ -281,10 +281,10 @@ class Movement extends Phaser.Scene {
             this.cooldown = false;
             this.powerUp.visible = false;
             this.playerSpeed = 240; // double speed
-            this.time.delayedCall(2000, () => {
+            this.time.delayedCall(4000, () => {
                 this.playerSpeed = 120;
                 console.log("Cooldown started");
-                this.time.delayedCall(30000, () => {
+                this.time.delayedCall(15000, () => {
                     this.cooldown = true;
                     this.powerUp.visible = true;
                     console.log("Cooldown ended, speed boost ready");
@@ -437,6 +437,7 @@ class Movement extends Phaser.Scene {
                 });
             } else {
                 this.time.delayedCall(2000, () => {
+                    this.gameMusic.stop();
                     this.scene.start("winScene");
                 });
             }
@@ -593,6 +594,7 @@ class Movement extends Phaser.Scene {
                 if (this.lives <= 0) {
                     this.gameOver = true;
                     console.log("GAME OVER");
+                    this.gameMusic.stop();
                     this.scene.start("restartScene");
                 }
             }

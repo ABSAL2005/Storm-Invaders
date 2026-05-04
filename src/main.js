@@ -9,7 +9,7 @@ let config = {
     },
     width: 800,
     height: 600,
-    scene: [MenuScene, WinScene, Movement, RestartScene]
+    scene: [MenuScene, WinScene, Movement, RestartScene, Controls]
 }
 
 let my = {sprite: {}};
