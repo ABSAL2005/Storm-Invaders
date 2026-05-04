@@ -22,7 +22,7 @@ class Movement extends Phaser.Scene {
         this.load.image("Sky", "assets/PNG/Background/bg_layer1.png");
         this.load.image("BackCloud", "assets/PNG/Background/bg_layer2.png");
         this.load.image("UFO", "assets/Aliens/PNG/shipGreen_manned.png");
-        this.load.image("alien", "assets/Alien_Sprites/Alien-sprites/alienGreen.png");
+        this.load.image("alien", "assets/Alien_Sprites/alienGreen.png");
         this.load.image("Laser", "assets/Aliens/PNG/laserGreen1.png");
         this.load.image("Ring", "assets/Aliens/PNG/laserGreen3.png");
         this.load.image("Explosion", "assets/Aliens/PNG/laserGreen_burst.png");
