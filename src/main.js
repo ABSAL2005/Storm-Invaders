@@ -9,8 +9,8 @@ let config = {
     },
     width: 800,
     height: 600,
-    scene: [MenuScene, WinScene, Movement, RestartScene, Controls]
-}
+    scene: [MenuScene, WinScene, Movement, RestartScene, Controls, Credits]
+};
 
 let my = {sprite: {}};
 

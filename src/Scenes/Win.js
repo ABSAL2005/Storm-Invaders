@@ -14,12 +14,17 @@ class WinScene extends Phaser.Scene {
         this.level = this.sound.add("levelChange", { volume: 0.5 });
         this.add.text(this.scale.width / 3 + 55, 250, "YOU WON", { fontSize: "40px", fill: "#eaff00" }).setDepth(1);
         this.add.text(this.scale.width / 3, 350, "Press SPACE to play again", { fontSize: "20px", fill: "#eaff00" }).setDepth(1);
+        this.add.text(this.scale.width / 3, 450, "Press V to play credits", { fontSize: "20px", fill: "#eaff00" }).setDepth(1);
 
         this.input.keyboard.once("keydown-SPACE", () => {
             this.level.play();
             this.time.delayedCall(800, () => {
                 this.scene.start("movementScene");
             });
+        });
+
+        this.input.keyboard.once("keydown-V", () => {
+            this.scene.start("creditsScene");
         });
 
         my.sprite.background = this.add.sprite(0, 0, "background").setOrigin(0, 0);

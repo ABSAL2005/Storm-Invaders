@@ -377,34 +377,32 @@ class Movement extends Phaser.Scene {
         let my = this.my;
 
         // Move ALL aliens left/right
+        let speed = 20 * this.game.loop.delta / 1000;
+
+        // Move formation bounds FIRST
+        this.formationLeft += this.enemyDirection * speed;
+        this.formationRight += this.enemyDirection * speed;
+
+        // Move all aliens with the formation
         for (let alien of my.sprite.alienGroup.getChildren()) {
-            alien.x += this.enemyDirection * 20 * this.game.loop.delta / 1000;
+            alien.x += this.enemyDirection * speed;
         }
 
-        // ✅ Recalculate formation bounds from REAL positions (fixes bug)
-        let aliens = my.sprite.alienGroup.getChildren();
-
-        if (aliens.length > 0) {
-            this.formationLeft = Math.min(...aliens.map(a => a.x));
-            this.formationRight = Math.max(...aliens.map(a => a.x));
-        }
-
-        // ✅ Edge detection (ONLY triggers once per side)
+        // EDGE DETECTION
         if (this.formationRight > this.scale.width - 50 && this.enemyDirection === 1) {
             this.enemyDirection = -1;
 
-            for (let alien of aliens) {
+            for (let alien of my.sprite.alienGroup.getChildren()) {
                 alien.y += 5;
             }
         }
         else if (this.formationLeft < 50 && this.enemyDirection === -1) {
             this.enemyDirection = 1;
 
-            for (let alien of aliens) {
+            for (let alien of my.sprite.alienGroup.getChildren()) {
                 alien.y += 5;
             }
         }
-
 
         // Move UFOs across the top of the screen
         for (let ufo of my.sprite.UFOGroup.getChildren()) {
@@ -703,6 +701,16 @@ class Movement extends Phaser.Scene {
 
                     this.updateCoin();
                 }
+            }
+        }
+
+        // Check if aliens pass the player
+        for (let alien of my.sprite.alienGroup.getChildren()) {
+            if (alien.y > this.scale.height - 100) {
+                this.gameOver = true;
+                console.log("GAME OVER - ALIENS LANDED");
+                this.gameMusic.stop();
+                this.scene.start("restartScene");
             }
         }
     }
