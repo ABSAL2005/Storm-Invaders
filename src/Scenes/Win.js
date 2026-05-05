@@ -28,8 +28,8 @@ class WinScene extends Phaser.Scene {
         });
 
         my.sprite.background = this.add.sprite(0, 0, "background").setOrigin(0, 0);
-        my.sprite.background.setScale(0.4);  // Scale the background to fit the scene
-        my.sprite.background.setDepth(-1);  // Ensure the background is behind other elements
+        my.sprite.background.setScale(0.4); 
+        my.sprite.background.setDepth(-1);  
         let darkOverlay = this.add.rectangle(400, 300, 800, 600, 0x000000);
         darkOverlay.setAlpha(0.5);
         darkOverlay.setDepth(0); // above sky, below player

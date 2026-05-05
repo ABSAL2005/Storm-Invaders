@@ -107,7 +107,6 @@ class Movement extends Phaser.Scene {
         enemy.setScale(0.3);
         enemy.setDepth(1);
 
-        // optional: if sprite is sideways or upside down
         enemy.setRotation(Phaser.Math.Between(-0.2, 0.2));
 
         this.my.sprite.flyerGroup.add(enemy);
@@ -128,7 +127,7 @@ class Movement extends Phaser.Scene {
             loop: true,
             callback: () => {
 
-                // stop spawning once 3 are killed
+                // stop spawning once 5 are killed
                 if (this.flyersKilled >= this.maxFlyers) {
                     this.flyerSpawnEvent.remove();
                     return;
@@ -355,7 +354,6 @@ class Movement extends Phaser.Scene {
     playerMovement() {
         let my = this.my;   // create an alias to this.my for readability
 
-        // Add code in update() to move the player avatar left on "A" and right on "D". Be sure to use pixel velocities expressed in pixels/second and delta scaling for fps-scaled movement! 
         if (this.leftKey.isDown) {
             my.sprite.cloud.x -= this.playerSpeed * this.game.loop.delta / 1000;  // move left at player speed pixels/second
         }
